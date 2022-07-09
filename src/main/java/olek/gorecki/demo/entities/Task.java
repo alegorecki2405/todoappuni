@@ -1,6 +1,7 @@
 package olek.gorecki.demo.entities;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,12 +17,13 @@ public class Task {
     private String title;
     private String description;
 
-    @DateTimeFormat(fallbackPatterns = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date creationDate;
 
-    @DateTimeFormat(fallbackPatterns = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date deadline;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -29,6 +31,11 @@ public class Task {
     private boolean isDone = false;
 
     public Task() {
+    }
+
+    public void toggle() {
+        this.isDone = !this.isDone;
+
     }
 
     public boolean isDone() {

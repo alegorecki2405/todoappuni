@@ -2,6 +2,7 @@ package olek.gorecki.demo.registration;
 
 
 import lombok.AllArgsConstructor;
+import olek.gorecki.demo.entities.Gender;
 import olek.gorecki.demo.entities.Role;
 import olek.gorecki.demo.entities.User;
 import olek.gorecki.demo.registration.token.ConfirmationToken;
@@ -27,7 +28,8 @@ public class RegistrationService {
                         request.getLastName(),
                         request.getEmail(),
                         request.getPassword(),
-                        Role.USER
+                        Role.valueOf(request.getRole()),
+                        Gender.valueOf(request.getGender())
                 )
         );
 
