@@ -30,7 +30,7 @@ public class TaskService {
         if(auth.getAuth().getAuthorities().contains(Role.ADMIN)) {
             return taskRepository.findAll();
         }
-        return taskRepository.findAllByUser_Email("xd3");
+        return taskRepository.findAllByUser_Email(auth.getAuth().getName());
     }
 
     public Task createTask(TaskWriteModel taskWriteModel) {
@@ -39,7 +39,7 @@ public class TaskService {
         task.setDescription(taskWriteModel.getDescription());
         task.setCreationDate(new Date());
         task.setDeadline(taskWriteModel.getDeadline());
-        User user = userRepository.findByEmail("xd3").orElseThrow();
+        User user = userRepository.findByEmail(auth.getAuth().getName()).orElseThrow();
         user.getTasks().add(task);
         task.setUser(user);
         return taskRepository.save(task);
