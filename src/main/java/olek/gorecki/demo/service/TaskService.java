@@ -11,12 +11,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
     private final TaskRepository taskRepository;
     private final Auth auth;
     private final UserRepository userRepository;
+    private final Long ONE_DAY_TO_MILLISECONDS = 86400000l;
 
     public TaskService(TaskRepository taskRepository, Auth auth, UserRepository userRepository) {
         this.taskRepository = taskRepository;
@@ -52,5 +54,13 @@ public class TaskService {
             task.toggle();
             taskRepository.save(task);
         }
+    }
+
+    public List<Task> findAllUndoneTasksWithDeadlineWithinDay() {
+        Date today = new Date();
+        Long now = today.getTime();
+        return taskRepository.findAll().stream()
+                .filter(task -> !task.isDone() && task.getDeadline().getTime()-now<ONE_DAY_TO_MILLISECONDS )
+                .collect(Collectors.toList());
     }
 }

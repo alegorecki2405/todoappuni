@@ -32,4 +32,9 @@ public class TaskController {
         taskService.toggleTask(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/task/undone")
+    public ResponseEntity<List<Task>> findAllUndoneTasksWithDeadlineWithinDay(){
+        return ResponseEntity.ok(taskService.findAllUndoneTasksWithDeadlineWithinDay());
+    }
 }
