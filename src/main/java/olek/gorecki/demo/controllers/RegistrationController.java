@@ -1,6 +1,8 @@
-package olek.gorecki.demo.registration;
+package olek.gorecki.demo.controllers;
 
 import lombok.AllArgsConstructor;
+import olek.gorecki.demo.registration.RegistrationRequest;
+import olek.gorecki.demo.service.RegistrationService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

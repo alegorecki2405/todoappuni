@@ -1,13 +1,13 @@
-package olek.gorecki.demo.registration;
+package olek.gorecki.demo.service;
 
 
 import lombok.AllArgsConstructor;
 import olek.gorecki.demo.entities.Gender;
 import olek.gorecki.demo.entities.Role;
 import olek.gorecki.demo.entities.User;
+import olek.gorecki.demo.registration.RegistrationRequest;
 import olek.gorecki.demo.registration.token.ConfirmationToken;
 import olek.gorecki.demo.registration.token.ConfirmationTokenService;
-import olek.gorecki.demo.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
